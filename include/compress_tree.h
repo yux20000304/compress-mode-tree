@@ -4,6 +4,8 @@
 
 #ifndef MODE_COMPRESS_COMPRESS_TREE_H
 #define MODE_COMPRESS_COMPRESS_TREE_H
+
+#include <unordered_map>
 #include"compress_treenode.h"
 
 class fileMeta{
@@ -35,7 +37,7 @@ public:
     ~Tree();
 
     TreeNode* root;
-    std::map<std::string, fileMeta*> file_map;
+    std::unordered_map<std::string, fileMeta*> file_map;
 private:
 
 

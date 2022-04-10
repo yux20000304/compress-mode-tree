@@ -70,15 +70,12 @@ void Tree::addDirNode(std::string dir_path, TreeNode *cur, int st_mode, int pare
 
 TreeNode *Tree::getDirMode(std::string dir_path, TreeNode *cur) {
     for(auto it:cur->children){
-        int pre_idx = findPrefix(it.first, dir_path);
-        if(pre_idx == 0){
-            continue;
-        }
+        std::string next_dir = dir_path.substr(0,it.first.size());
+        if( next_dir == it.first){
         //match dir path, change to next dir
-        if(pre_idx == it.first.size()){
             cur = it.second;
-            std::string next_dir = dir_path.substr(pre_idx, dir_path.size());
-            return getDirMode(next_dir, it.second);
+            std::string next_dir = dir_path.substr(it.first.size(), dir_path.size());
+            return getDirMode(next_dir, cur);
         }
     }
     return cur;
