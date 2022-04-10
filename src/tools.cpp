@@ -102,12 +102,3 @@ std::vector<std::string> SplitString(const std::string &s, const std::string &de
     }
     return tokens;
 }
-
-int findPrefix(const std::string& s1, const std::string& s2){
-    int length = fmin(s1.size(), s2.size());
-    int index = 0;
-    while (index < length && s1[index] == s2[index]) {
-        index++;
-    }
-    return index;
-}

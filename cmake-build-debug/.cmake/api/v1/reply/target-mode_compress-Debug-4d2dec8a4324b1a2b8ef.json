@@ -62,7 +62,7 @@
 				[
 					1
 				],
-				"standard" : "17"
+				"standard" : "17;-O3 -Wall -Wextra"
 			},
 			"sourceIndexes" : 
 			[

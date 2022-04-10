@@ -28,8 +28,8 @@ private:
 class Tree{
 public:
     Tree();
-    void addDirNode(std::string dir_path, TreeNode* cur, int st_mode, int parent_mode);
-    TreeNode *getDirMode(std::string dir_path, TreeNode* cur);
+    void addDirNode(const std::string dir_path, TreeNode* cur, int st_mode, int parent_mode);
+    TreeNode *getDirMode(std::string &dir_path, TreeNode* cur);
     void addFileNode(std::string& dir_path, int st_mode);
     std::string getFileMeta(std::string& file_path);
     void setFileMeta(std::string& file_path, int mode);

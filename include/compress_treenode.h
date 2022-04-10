@@ -6,7 +6,8 @@
 #define MODE_COMPRESS_COMPRESS_TREENODE_H
 #include<iostream>
 #include <map>
-
+#include <unordered_map>
+#include <vector>
 
 
 class TreeNode{
@@ -16,7 +17,8 @@ public:
     void setDirMode(int indir_mode);
     int getDirMode();
     ~TreeNode();
-    std::map<std::string, TreeNode*> children;
+    std::vector<TreeNode*> children;
+    std::string name;
 
 private:
     int dir_mode;

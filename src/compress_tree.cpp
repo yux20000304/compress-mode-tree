@@ -40,19 +40,19 @@ Tree::Tree() {}
 
 Tree::~Tree() {}
 
-void Tree::addDirNode(std::string dir_path, TreeNode *cur, int st_mode, int parent_mode) {
+void Tree::addDirNode(const std::string dir_path, TreeNode *cur, int st_mode, int parent_mode) {
 
     for(auto it:cur->children){
-        int pre_idx = findPrefix(it.first, dir_path);
+        int pre_idx = findPrefix( dir_path, it->name);
         if(pre_idx == 0){
             continue;
         }
         //match dir path, change to next dir
-        if(pre_idx == it.first.size()){
-            cur = cur->children.at(it.first);
+        if(pre_idx == it->name.size()){
+            cur = it;
             std::string next_dir = dir_path.substr(pre_idx, dir_path.size());
-            int cur_mode = it.second->getDirMode();
-            return addDirNode(next_dir, it.second, st_mode, cur_mode);
+            int cur_mode = it->getDirMode();
+            return addDirNode(next_dir, cur, st_mode, cur_mode);
         }
     }
     //has same mode with parent node
@@ -61,21 +61,42 @@ void Tree::addDirNode(std::string dir_path, TreeNode *cur, int st_mode, int pare
     }
     else{ //add new node
         TreeNode *add_node = new TreeNode();
+        add_node->name = dir_path;
         add_node->setDirMode(st_mode);
-        cur->children.insert({dir_path, add_node});
+        cur->children.push_back(add_node);
         return;
     }
     return;
 }
 
-TreeNode *Tree::getDirMode(std::string dir_path, TreeNode *cur) {
-    for(auto it:cur->children){
-        std::string next_dir = dir_path.substr(0,it.first.size());
-        if( next_dir == it.first){
-        //match dir path, change to next dir
-            cur = it.second;
-            std::string next_dir = dir_path.substr(it.first.size(), dir_path.size());
-            return getDirMode(next_dir, cur);
+TreeNode *Tree::getDirMode(std::string &dir_path, TreeNode *cur) {
+
+
+//    for(int i = 0; i < cur->children.size(); i++){
+//        TreeNode *it = cur->children[i];
+//        int prefix_idx = findPrefix(dir_path, it->name);
+//        if( prefix_idx == it->name.size()){
+//        //match dir path, change to next dir
+//            cur = it;
+//            return getDirMode(dir_path.substr(prefix_idx), cur);
+//        }
+//    }
+    while(!dir_path.empty()){
+        int i;
+        for(i = 0; i < cur->children.size(); i++){
+            int prefix_idx = 0;
+            int length = cur->children[i]->name.size();
+            while (prefix_idx < length && !(dir_path[prefix_idx] ^ cur->children[i]->name[prefix_idx])) {
+                prefix_idx++;
+            }
+            if( prefix_idx == cur->children[i]->name.size()){
+                cur = cur->children[i];
+                dir_path.erase(0,prefix_idx);
+                break;
+            }
+        }
+        if(i == cur->children.size()){
+            break;
         }
     }
     return cur;
@@ -105,8 +126,8 @@ long long Tree::treeTraverse() {
         count1++;
         name_q.pop();
         for(auto it : cur_node->children){
-            tree_q.push(it.second);
-            name_q.push(it.first);
+            tree_q.push(it);
+            name_q.push(it->name);
         }
     }
 
