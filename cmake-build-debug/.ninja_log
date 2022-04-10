@@ -1,0 +1,6 @@
+# ninja log v5
+1	652	1649573126168499795	CMakeFiles/mode_compress.dir/src/compress_treenode.cpp.o	43806b4ebf0250e7
+1	858	1649573126374501050	CMakeFiles/mode_compress.dir/src/tools.cpp.o	38e0961e8ed3681f
+1	918	1649573126434501416	CMakeFiles/mode_compress.dir/main.cpp.o	e8c6e6c9a57d7632
+2	1163	1649573126679502909	CMakeFiles/mode_compress.dir/src/compress_tree.cpp.o	9540c56354786589
+1164	1264	1649573126780503524	mode_compress	de6f61053b5a338
