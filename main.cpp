@@ -6,6 +6,9 @@
 #include "proper_tree.h"
 
 
+const uint64_t SIZE = 1024UL * 1024UL * 1024UL;
+
+
 int main()
 {
     Tree *tree1 = new Tree();
@@ -13,8 +16,12 @@ int main()
 
     tree1->root = new TreeNode();
     tree2->root = new properTreeNode();
+    long long count1 = 0;
     long long count2 = 0;
     long long count3 = 0;
+
+    tree1->InitKVengine();
+
 
     //add dir node
     std::ifstream infile1("../dirinfo.txt",std::ios::in);
@@ -27,7 +34,7 @@ int main()
         tree1->addDirNode(textline[0], tree1->root, mode, 0);
         std::vector<std::string> path_name = SplitString(textline[0],"/");
         tree2->addNode(path_name,tree2->root);
-        count2++;
+        count1++;
     }
     infile1.close();
 
@@ -41,16 +48,17 @@ int main()
         tree1->setFileMeta(textline[0], mode);
         std::vector<std::string> path_name = SplitString(textline[0],"/");
         tree2->addNode(path_name, tree2->root);
-        count3++;
+        count2++;
     }
     infile2.close();
 
-//    long long ret =tree1->treeTraverse();
+    count3 =tree1->treeTraverse();
 //    long long ret1 =tree2->treeTraverse();
 //    std::cout << ret << std::endl;
 //    std::cout << ret1 << std::endl;
-    std::cout << count2 << std::endl;
-    std::cout << count3 << std::endl;
+    std::cout << "directory number:" << count1 << std::endl;
+    std::cout << "file number:" << count2 << std::endl;
+    std::cout << "compress directory number:" << count3 <<std::endl;
 
     clock_t start,stop;
     double duration;
@@ -58,8 +66,9 @@ int main()
     start = clock();
     while(std::getline(infile3,text)){
         std::vector<std::string> textline = SplitString(text,"&");
+        std::string temptextline = textline[0];
         tree1->getDirMode(textline[0], tree1->root);
-//        tree1->getFileMeta(textline[0]);
+        tree1->getFileMeta(temptextline);
     }
     stop = clock();
     duration = (stop-start)/CLOCKS_PER_SEC;
@@ -77,6 +86,10 @@ int main()
     stop = clock();
     duration = (stop-start)/CLOCKS_PER_SEC;
     std::cout<< "time:" << duration << "s" << std::endl;
+
+
+    std::cout << "compress tree dir visit number:" << tree1->count1 << std::endl;
+    std::cout << "proper tree dir visit number:" << tree2->count2 << std::endl;
 
     return 0;
 }

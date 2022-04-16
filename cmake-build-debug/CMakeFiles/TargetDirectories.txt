@@ -1,3 +1,0 @@
-/home/yyx/projects/compress-mode-tree/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/yyx/projects/compress-mode-tree/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/yyx/projects/compress-mode-tree/cmake-build-debug/CMakeFiles/mode_compress.dir

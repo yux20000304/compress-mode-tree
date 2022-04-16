@@ -6,35 +6,17 @@
 #include"tools.h"
 
 
-fileMeta::fileMeta() {
-    setFileMeta();
-}
 
-fileMeta::~fileMeta() {}
+#define ASSERT(expr)                                                                     \
+	do {                                                                             \
+		if (!(expr))                                                             \
+			std::cout << pmemkv_errormsg() << std::endl;                     \
+		assert(expr);                                                            \
+	} while (0)
+#define LOG(msg) std::cout << msg << std::endl
 
-void fileMeta::setFileMeta() {
-    time = get_time();
-}
+const uint64_t SIZE = 1024UL * 1024UL * 1024UL;
 
-std::string fileMeta::getFileMeta() {
-    return time + std::to_string(mode);
-}
-
-const std::string &fileMeta::getTime() const {
-    return time;
-}
-
-void fileMeta::setTime(const std::string &time) {
-    fileMeta::time = time;
-}
-
-int fileMeta::getMode() const {
-    return mode;
-}
-
-void fileMeta::setMode(int mode) {
-    fileMeta::mode = mode;
-}
 
 Tree::Tree() {}
 
@@ -92,6 +74,7 @@ TreeNode *Tree::getDirMode(std::string &dir_path, TreeNode *cur) {
             if( prefix_idx == cur->children[i]->name.size()){
                 cur = cur->children[i];
                 dir_path.erase(0,prefix_idx);
+                count1++;
                 break;
             }
         }
@@ -105,12 +88,25 @@ TreeNode *Tree::getDirMode(std::string &dir_path, TreeNode *cur) {
 void Tree::setFileMeta(std::string &file_path, int mode) {
     fileMeta *file_meta = new fileMeta();
     file_meta->setMode(mode);
-    file_map.insert({file_path, file_meta});
+    if (USE_PMEMKV) {
+        std::string meta = file_meta->getFileMeta();
+        PutMetadataCache(file_path, meta);
+    }
+    else {
+        file_map.insert({file_path, file_meta});
+    }
 }
-
 std::string Tree::getFileMeta(std::string &file_path) {
-    fileMeta *file_meta = file_map.at(file_path);
-    return file_meta->getFileMeta();
+    if(USE_PMEMKV){
+        std::string ret;
+        GetMetadataCache(file_path, ret);
+        return ret;
+    }
+    else {
+//        std::cout<<file_path<<std::endl;
+        fileMeta *file_meta = file_map.at(file_path);
+        return file_meta->getFileMeta();
+    }
 }
 
 long long Tree::treeTraverse() {
@@ -122,7 +118,7 @@ long long Tree::treeTraverse() {
     while(!tree_q.empty()) {
         TreeNode *cur_node = tree_q.front();
         tree_q.pop();
-        std::cout<< name_q.front() <<std::endl;
+//        std::cout<< name_q.front() <<std::endl;
         count1++;
         name_q.pop();
         for(auto it : cur_node->children){
@@ -132,4 +128,38 @@ long long Tree::treeTraverse() {
     }
 
     return count1;
+}
+
+void Tree::InitKVengine() {
+    LOG("Creating config");
+
+    s = cfg.put_path("/dev/shm/metadata.poolset");
+
+    ASSERT(s == pmem::kv::status::OK);
+    s = cfg.put_size(SIZE);
+    ASSERT(s == pmem::kv::status::OK);
+    s = cfg.put_create_if_missing(true);
+    ASSERT(s == pmem::kv::status::OK);
+
+//    LOG("Opening pmemkv database with 'cmap' engine");
+    s = kv.open("radix", std::move(cfg));
+    ASSERT(s == pmem::kv::status::OK);
+}
+
+void Tree::GetMetadataCache(std::string &key, std::string &value) {
+//    LOG("Reading key back");
+    s = kv.get(key, &value);
+    ASSERT(s == pmem::kv::status::OK );
+}
+
+void Tree::PutMetadataCache(std::string &key, std::string& value) {
+//    LOG("Putting new key");
+    s = kv.put(key, value);
+    ASSERT(s == pmem::kv::status::OK);
+}
+
+void Tree::RemoveMetadataCache(std::string &key) {
+//    LOG("Removing existing key");
+    s = kv.remove(key);
+    ASSERT(s == pmem::kv::status::OK);
 }

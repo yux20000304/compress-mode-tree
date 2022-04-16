@@ -42,6 +42,7 @@ properTreeNode *properTree::getNode(std::vector<std::string> path, properTreeNod
     for(auto child : cur->children){
         if(child.first == path[0]){
             path.erase(path.begin());
+            count2++;
             return getNode(path, child.second);
         }
     }

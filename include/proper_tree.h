@@ -29,6 +29,8 @@ public:
     void addNode(std::vector<std::string> path, properTreeNode *cur);
     properTreeNode *getNode(std::vector<std::string> path, properTreeNode *cur);
     long long treeTraverse();
+
+    long long count2 = 0;
 };
 
 
