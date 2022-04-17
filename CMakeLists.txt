@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 project(mode_compress)
 
-set(CMAKE_CXX_STANDARD 17 " -O3 -Wall -Wextra")
+set(CMAKE_CXX_STANDARD 17 "  -Wall -Wextra")
 
 
 set(LIBPMEMOBJ_CPP_REQUIRED_VERSION 1.9)

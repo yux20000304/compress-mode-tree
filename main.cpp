@@ -1,13 +1,21 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <fstream>
+#include <thread>
 #include "tools.h"
 #include "compress_tree.h"
 #include "proper_tree.h"
 
 
+#define MULTI_THREADS 0
+
 const uint64_t SIZE = 1024UL * 1024UL * 1024UL;
 
+
+void *getMode(Tree *tree, std::string &dir_path, TreeNode* root_node){
+    tree->getDirMode(dir_path,tree->root);
+    return nullptr;
+}
 
 int main()
 {
@@ -67,8 +75,15 @@ int main()
     while(std::getline(infile3,text)){
         std::vector<std::string> textline = SplitString(text,"&");
         std::string temptextline = textline[0];
-        tree1->getDirMode(textline[0], tree1->root);
-        tree1->getFileMeta(temptextline);
+        if(MULTI_THREADS){
+            std::thread t1(getMode, std::ref(tree1), std::ref(textline[0]), std::ref(tree1->root));
+            tree1->getFileMeta(temptextline);
+            t1.join();
+        }
+        else{
+            tree1->getDirMode(textline[0], tree1->root);
+            tree1->getFileMeta(temptextline);
+        }
     }
     stop = clock();
     duration = (stop-start)/CLOCKS_PER_SEC;
