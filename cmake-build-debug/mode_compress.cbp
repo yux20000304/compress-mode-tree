@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="mode_compress"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/yyx/projects/compress-mode-tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mode_compress">
+				<Option output="/home/yyx/projects/compress-mode-tree/cmake-build-debug/mode_compress" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yyx/projects/compress-mode-tree/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yyx/projects/compress-mode-tree/include"/>
+					<Add directory="/home/yyx/projects/compress-mode-tree/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 mode_compress"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mode_compress/fast">
+				<Option output="/home/yyx/projects/compress-mode-tree/cmake-build-debug/mode_compress" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yyx/projects/compress-mode-tree/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yyx/projects/compress-mode-tree/include"/>
+					<Add directory="/home/yyx/projects/compress-mode-tree/src"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 mode_compress/fast"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/yyx/projects/compress-mode-tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/yyx/projects/compress-mode-tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j4 -f &quot;/home/yyx/projects/compress-mode-tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/include/compress_tree.h">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/include/compress_treenode.h">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/include/filemeta.h">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/include/proper_tree.h">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/include/tools.h">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/main.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/src/compress_tree.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/src/compress_treenode.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/src/filemeta.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/src/proper_tree.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/src/tools.cpp">
+			<Option target="mode_compress"/>
+		</Unit>
+		<Unit filename="/home/yyx/projects/compress-mode-tree/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

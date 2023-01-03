@@ -5,10 +5,11 @@
 #ifndef MODE_COMPRESS_PROPER_TREE_H
 #define MODE_COMPRESS_PROPER_TREE_H
 
-#include<iostream>
+#include <iostream>
 #include <map>
 
-class properTreeNode{
+class properTreeNode
+{
 
 public:
     properTreeNode();
@@ -19,8 +20,8 @@ public:
     std::string time;
 };
 
-
-class properTree{
+class properTree
+{
 
 public:
     properTree();
@@ -33,6 +34,4 @@ public:
     long long count2 = 0;
 };
 
-
-
-#endif //MODE_COMPRESS_PROPER_TREE_H
+#endif // MODE_COMPRESS_PROPER_TREE_H

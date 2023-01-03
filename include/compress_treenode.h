@@ -4,25 +4,24 @@
 
 #ifndef MODE_COMPRESS_COMPRESS_TREENODE_H
 #define MODE_COMPRESS_COMPRESS_TREENODE_H
-#include<iostream>
+#include <iostream>
 #include <map>
 #include <unordered_map>
 #include <vector>
 
-
-class TreeNode{
+class TreeNode
+{
 
 public:
     TreeNode();
     void setDirMode(int indir_mode);
     int getDirMode();
     ~TreeNode();
-    std::vector<TreeNode*> children;
+    std::vector<TreeNode *> children;
     std::string name;
 
 private:
     int dir_mode;
 };
 
-
-#endif //MODE_COMPRESS_COMPRESS_TREENODE_H
+#endif // MODE_COMPRESS_COMPRESS_TREENODE_H

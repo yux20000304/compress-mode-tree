@@ -8,7 +8,8 @@
 #include <iostream>
 #include "tools.h"
 
-class fileMeta{
+class fileMeta
+{
 public:
     fileMeta();
     void setFileMeta();
@@ -24,4 +25,4 @@ private:
     int mode;
 };
 
-#endif //MODE_COMPRESS_FILEMETA_H
+#endif // MODE_COMPRESS_FILEMETA_H

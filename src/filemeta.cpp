@@ -4,33 +4,39 @@
 
 #include "filemeta.h"
 
-
-fileMeta::fileMeta() {
+fileMeta::fileMeta()
+{
     setFileMeta();
 }
 
 fileMeta::~fileMeta() {}
 
-void fileMeta::setFileMeta() {
+void fileMeta::setFileMeta()
+{
     time = get_time();
 }
 
-std::string fileMeta::getFileMeta() {
+std::string fileMeta::getFileMeta()
+{
     return time + std::to_string(mode);
 }
 
-const std::string &fileMeta::getTime() const {
+const std::string &fileMeta::getTime() const
+{
     return time;
 }
 
-void fileMeta::setTime(const std::string &time) {
+void fileMeta::setTime(const std::string &time)
+{
     fileMeta::time = time;
 }
 
-int fileMeta::getMode() const {
+int fileMeta::getMode() const
+{
     return mode;
 }
 
-void fileMeta::setMode(int mode) {
+void fileMeta::setMode(int mode)
+{
     fileMeta::mode = mode;
 }
