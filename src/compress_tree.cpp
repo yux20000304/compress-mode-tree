@@ -23,13 +23,13 @@ Tree::Tree() {}
 Tree::~Tree() {}
 
 void Tree::addDirNode(const std::string dir_path, TreeNode *cur, int st_mode, int parent_mode) {
-
+    //traverse all child nodes
     for(auto it:cur->children){
         int pre_idx = findPrefix( dir_path, it->name);
         if(pre_idx == 0){
             continue;
         }
-        //match dir path, change to next dir
+        //match dir path, change to next level dir
         if(pre_idx == it->name.size()){
             cur = it;
             std::string next_dir = dir_path.substr(pre_idx, dir_path.size());
@@ -37,7 +37,7 @@ void Tree::addDirNode(const std::string dir_path, TreeNode *cur, int st_mode, in
             return addDirNode(next_dir, cur, st_mode, cur_mode);
         }
     }
-    //has same mode with parent node
+    //has the same mode with parent node
     if(st_mode == parent_mode){
         return;
     }
@@ -49,6 +49,46 @@ void Tree::addDirNode(const std::string dir_path, TreeNode *cur, int st_mode, in
         return;
     }
     return;
+}
+
+void Tree::deleteDirNode(const std::string dir_path, TreeNode* cur){
+    //traverse all child nodes
+    for(auto it:cur->children){
+        int pre_idx = findPrefix( dir_path, it->name);
+        //no prefix find
+        //eg: dir_path : adsd/bsd/cs and it->name : zcdc/
+        if(pre_idx == 0){
+            continue;
+        }
+        //match dir path, change to next level dir
+        //eg: dir_path : adsd/bsd and it->name : adsd/
+        if(pre_idx == it->name.size()){
+            //this is the last level, delete this node and return
+            if(pre_idx == dir_path.size()){
+                delete it;
+                return ;
+            }
+            cur = it;
+            std::string next_dir = dir_path.substr(pre_idx, dir_path.size());
+            return deleteDirNode(next_dir, cur);
+        }
+        //eg: dir_path : adsd/bsd/ and it->name : adsd/bsd/sdd/dsfg/
+        else{
+            if(dir_path[pre_idx] == '/'){
+                std::vector<std::string> path_name = SplitString(dir_path,"/");
+                if(path_name.size() == 1){
+                    delete it;
+                    return ;
+                }
+                else{
+                    it->name = path_name[0];
+                    for(auto level_path : path_name){
+                        it->name = it->name + "/" + level_path;
+                    }
+                }
+            }
+        }
+    }
 }
 
 TreeNode *Tree::getDirMode(std::string &dir_path, TreeNode *cur) {
@@ -88,25 +128,27 @@ TreeNode *Tree::getDirMode(std::string &dir_path, TreeNode *cur) {
 void Tree::setFileMeta(std::string &file_path, int mode) {
     fileMeta *file_meta = new fileMeta();
     file_meta->setMode(mode);
-    if (USE_PMEMKV) {
+
+#ifdef USE_PMEMKV
         std::string meta = file_meta->getFileMeta();
         PutMetadataCache(file_path, meta);
-    }
-    else {
+#else
         file_map.insert({file_path, file_meta});
-    }
+#endif
+
 }
 std::string Tree::getFileMeta(std::string &file_path) {
-    if(USE_PMEMKV){
+
+#ifdef USE_PMEMKV
         std::string ret;
         GetMetadataCache(file_path, ret);
         return ret;
-    }
-    else {
+#else
 //        std::cout<<file_path<<std::endl;
         fileMeta *file_meta = file_map.at(file_path);
         return file_meta->getFileMeta();
-    }
+#endif
+
 }
 
 long long Tree::treeTraverse() {
@@ -130,6 +172,7 @@ long long Tree::treeTraverse() {
     return count1;
 }
 
+#ifdef USE_PMEMKV
 void Tree::InitKVengine() {
     LOG("Creating config");
 
@@ -142,7 +185,7 @@ void Tree::InitKVengine() {
     ASSERT(s == pmem::kv::status::OK);
 
 //    LOG("Opening pmemkv database with 'cmap' engine");
-    s = kv.open("radix", std::move(cfg));
+    s = kv.open("cmap", std::move(cfg));
     ASSERT(s == pmem::kv::status::OK);
 }
 
@@ -163,3 +206,4 @@ void Tree::RemoveMetadataCache(std::string &key) {
     s = kv.remove(key);
     ASSERT(s == pmem::kv::status::OK);
 }
+#endif
