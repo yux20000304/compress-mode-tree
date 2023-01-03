@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/mode_compress.dir/main.cpp.o CMakeFiles/mode_compress.dir/src/tools.cpp.o CMakeFiles/mode_compress.dir/src/compress_treenode.cpp.o CMakeFiles/mode_compress.dir/src/compress_tree.cpp.o CMakeFiles/mode_compress.dir/src/proper_tree.cpp.o CMakeFiles/mode_compress.dir/src/filemeta.cpp.o -o mode_compress  -lpthread 

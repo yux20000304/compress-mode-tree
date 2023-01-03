@@ -1,4 +1,0 @@
-/home/yyx/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/221.5787.29/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/yyx/projects/compress-mode-tree -B /home/yyx/projects/compress-mode-tree/cmake-build-debug
--- Configuring done
--- Generating done
--- Build files have been written to: /home/yyx/projects/compress-mode-tree/cmake-build-debug
