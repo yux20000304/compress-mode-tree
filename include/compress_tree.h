@@ -7,8 +7,11 @@
 
 #include <unordered_map>
 #include "compress_treenode.h"
-#include <libpmemkv.hpp>
 #include "filemeta.h"
+
+#ifdef USE_PMEMKV
+    #include <libpmemkv.hpp>
+#endif
 
 class Tree
 {
